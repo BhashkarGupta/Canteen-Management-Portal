@@ -1,0 +1,81 @@
+ 
+{
+  "employeeID": "10001",
+  "firstName": "Aarav",
+  "lastName": "Sharma",
+  "email": "aarav.sharma@example.com",
+  "password": "passwordAarav123",
+  "userType": "employee"
+}
+{
+  "employeeID": "10002",
+  "firstName": "Isha",
+  "lastName": "Patel",
+  "email": "isha.patel@example.com",
+  "password": "passwordIsha456",
+  "userType": "admin"
+}
+{
+  "employeeID": "10003",
+  "firstName": "Vihaan",
+  "lastName": "Gupta",
+  "email": "vihaan.gupta@example.com",
+  "password": "passwordVihaan789",
+  "userType": "employee"
+}
+{
+  "employeeID": "10004",
+  "firstName": "Saanvi",
+  "lastName": "Reddy",
+  "email": "saanvi.reddy@example.com",
+  "password": "passwordSaanvi123",
+  "userType": "employee"
+}
+{
+  "employeeID": "10005",
+  "firstName": "Arjun",
+  "lastName": "Kumar",
+  "email": "arjun.kumar@example.com",
+  "password": "passwordArjun456",
+  "userType": "admin"
+}
+{
+  "employeeID": "10006",
+  "firstName": "Mira",
+  "lastName": "Singh",
+  "email": "mira.singh@example.com",
+  "password": "passwordMira789",
+  "userType": "employee"
+}
+{
+  "employeeID": "10007",
+  "firstName": "Rohan",
+  "lastName": "Mehta",
+  "email": "rohan.mehta@example.com",
+  "password": "passwordRohan123",
+  "userType": "employee"
+}
+{
+  "employeeID": "10008",
+  "firstName": "Ananya",
+  "lastName": "Joshi",
+  "email": "ananya.joshi@example.com",
+  "password": "passwordAnanya456",
+  "userType": "admin"
+}
+{
+  "employeeID": "10009",
+  "firstName": "Kabir",
+  "lastName": "Agarwal",
+  "email": "kabir.agarwal@example.com",
+  "password": "passwordKabir789",
+  "userType": "employee"
+}
+{
+  "employeeID": "10010",
+  "firstName": "Shruti",
+  "lastName": "Nair",
+  "email": "shruti.nair@example.com",
+  "password": "passwordShruti123",
+  "userType": "employee"
+}
