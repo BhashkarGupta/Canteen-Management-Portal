@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 dotenv.config(); // Load environment variables
 import { sequelize } from './config/database.js';
 import userRoutes from './routes/userRoutes.js';
+import menuRoutes from './routes/menuRoutes.js';
+import ingredientRoutes from './routes/ingredientRoutes.js';
 
 const app = express();
 
@@ -11,8 +13,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// User Routes
+// Routes
 app.use('/api/users', userRoutes);
+app.use('/api/menu', menuRoutes);
+app.use('/api/ingredients', ingredientRoutes);
+
+
 
 //Sync database and start server
 const startServer = async () => {
