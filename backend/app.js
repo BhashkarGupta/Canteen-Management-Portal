@@ -6,6 +6,7 @@ import { sequelize } from './config/database.js';
 import userRoutes from './routes/userRoutes.js';
 import menuRoutes from './routes/menuRoutes.js';
 import ingredientRoutes from './routes/ingredientRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use('/api/users', userRoutes);
 app.use('/api/menu', menuRoutes);
 app.use('/api/ingredients', ingredientRoutes);
+app.use('/api/orders', orderRoutes);
 
 
 
