@@ -8,6 +8,7 @@ import menuRoutes from './routes/menuRoutes.js';
 import ingredientRoutes from './routes/ingredientRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import './models/associations.js'; // Import associations
+import venueBookingRoutes from './routes/venueBookingRoutes.js';
 
 const app = express();
 
@@ -20,6 +21,9 @@ app.use('/api/users', userRoutes);
 app.use('/api/menu', menuRoutes);
 app.use('/api/ingredients', ingredientRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/bookings', venueBookingRoutes); // Venue and table bookings
+
+
 
 
 
