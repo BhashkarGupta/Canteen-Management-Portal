@@ -7,6 +7,7 @@ import userRoutes from './routes/userRoutes.js';
 import menuRoutes from './routes/menuRoutes.js';
 import ingredientRoutes from './routes/ingredientRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import './models/associations.js'; // Import associations
 
 const app = express();
 
@@ -28,7 +29,7 @@ const startServer = async () => {
     await sequelize.authenticate(); // Test database connection
     console.log('Database connected successfully.');
 
-    await sequelize.sync(); // Synchronize models and create tables if they don't exist
+    await sequelize.sync({ alter: true }); // Synchronize models and create tables if they don't exist
     console.log('Tables synchronized.');
 
     const PORT = process.env.PORT || 5000;

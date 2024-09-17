@@ -15,8 +15,4 @@ const OrderItem = sequelize.define('OrderItem', {
   },
 });
 
-// Relationships
-OrderItem.belongsTo(Order);
-OrderItem.belongsTo(MenuItem);
-
 export default OrderItem;

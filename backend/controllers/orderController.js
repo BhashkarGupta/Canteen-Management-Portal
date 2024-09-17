@@ -54,3 +54,19 @@ export const placeOrder = async (req, res) => {
     res.status(500).json({ message: 'Server error', error });
   }
 };
+
+// Fetch all orders for a specific user
+export const getUserOrders = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const orders = await Order.findAll({
+      where: { UserId: userId },
+      include: [{ model: OrderItem, include: [MenuItem] }],
+    });
+
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
