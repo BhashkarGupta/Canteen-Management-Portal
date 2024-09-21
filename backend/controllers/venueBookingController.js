@@ -55,3 +55,50 @@ export const getAllBookings = async (req, res) => {
       res.status(500).json({ message: 'Server error', error });
     }
   };
+
+  // Approve or Reject a booking (Admin)
+export const updateBookingStatus = async (req, res) => {
+  const { bookingId } = req.params;
+  const { status } = req.body;
+
+  try {
+    const booking = await VenueBooking.findByPk(bookingId);
+    
+    if (!booking) {
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+
+    if (!['approved', 'rejected'].includes(status)) {
+      return res.status(400).json({ message: 'Invalid status' });
+    }
+
+    booking.status = status;
+    await booking.save();
+
+    res.status(200).json({ message: `Booking ${status} successfully`, booking });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+// Fetch a booking by its ID (User)
+export const getBookingById = async (req, res) => {
+  const { bookingId } = req.params;
+
+  try {
+    const booking = await VenueBooking.findByPk(bookingId, {
+      include: {
+        model: User,
+        attributes: { exclude: ['passwordHash'] }
+      }
+    });
+
+    if (!booking) {
+      return res.status(404).json({ message: 'Booking not found' });
+    }
+
+    res.status(200).json(booking);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
