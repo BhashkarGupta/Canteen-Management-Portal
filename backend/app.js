@@ -3,12 +3,13 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config(); // Load environment variables
 import { sequelize } from './config/database.js';
+import './models/associations.js'; // Import associations
 import userRoutes from './routes/userRoutes.js';
 import menuRoutes from './routes/menuRoutes.js';
 import ingredientRoutes from './routes/ingredientRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
-import './models/associations.js'; // Import associations
 import venueBookingRoutes from './routes/venueBookingRoutes.js';
+import analyticsRoutes from './routes/analyticsRoutes.js';
 
 const app = express();
 
@@ -22,10 +23,7 @@ app.use('/api/menu', menuRoutes);
 app.use('/api/ingredients', ingredientRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/bookings', venueBookingRoutes); // Venue and table bookings
-
-
-
-
+app.use('/api/analytics', analyticsRoutes);
 
 //Sync database and start server
 const startServer = async () => {
@@ -34,6 +32,7 @@ const startServer = async () => {
     console.log('Database connected successfully.');
 
     await sequelize.sync({ alter: true }); // Synchronize models and create tables if they don't exist
+    // await sequelize.sync({ force: true });
     console.log('Tables synchronized.');
 
     const PORT = process.env.PORT || 5000;

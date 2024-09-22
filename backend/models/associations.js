@@ -1,11 +1,21 @@
 // backend/models/associations.js
+import MenuItem from './MenuItem.js';
+import Ingredient from './Ingredient.js';
+import MenuItemIngredient from './MenuItemIngredient.js';
 import Order from './Order.js';
 import OrderItem from './OrderItem.js';
-import MenuItem from './MenuItem.js';
 import User from './User.js';
 
-// Define relationships
-Order.hasMany(OrderItem); // An order has many order items
-OrderItem.belongsTo(Order); // Each order item belongs to an order
-OrderItem.belongsTo(MenuItem); // Each order item refers to a menu item
-Order.belongsTo(User); // Each order belongs to a user
+// Order relationships
+Order.hasMany(OrderItem);
+OrderItem.belongsTo(Order);
+OrderItem.belongsTo(MenuItem);
+Order.belongsTo(User);
+
+// MenuItem-Ingredient relationships with alias (error part of getIngredientUsageReport)
+// MenuItem.belongsToMany(Ingredient, { through: MenuItemIngredient, as: 'Ingredients' });
+// Ingredient.belongsToMany(MenuItem, { through: MenuItemIngredient, as: 'MenuItems' });
+
+// MenuItem-Ingredient relationships with explicit alias
+MenuItem.belongsToMany(Ingredient, { through: MenuItemIngredient, as: 'menuIngredients' });
+Ingredient.belongsToMany(MenuItem, { through: MenuItemIngredient, as: 'ingredientMenus' });
