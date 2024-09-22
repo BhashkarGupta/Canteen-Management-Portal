@@ -30,9 +30,25 @@ export const createMenuItem = async (req, res) => {
 };
 
 // Fetch all menu items
+// export const getMenuItems = async (req, res) => {
+//   try {
+//     const menuItems = await MenuItem.findAll({ include: Ingredient });
+//     res.status(200).json(menuItems);
+//   } catch (error) {
+//     res.status(500).json({ message: 'Server error', error });
+//     console.log(error);
+//   }
+// };
+
+// Fetch all menu items with associated ingredients
 export const getMenuItems = async (req, res) => {
   try {
-    const menuItems = await MenuItem.findAll({ include: Ingredient });
+    const menuItems = await MenuItem.findAll({
+      include: [{
+        model: Ingredient,
+        as: 'Ingredients',  // Use the alias 'Ingredients'
+      }],
+    });
     res.status(200).json(menuItems);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error });

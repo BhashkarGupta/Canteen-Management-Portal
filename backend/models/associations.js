@@ -17,5 +17,8 @@ Order.belongsTo(User);
 // Ingredient.belongsToMany(MenuItem, { through: MenuItemIngredient, as: 'MenuItems' });
 
 // MenuItem-Ingredient relationships with explicit alias
-MenuItem.belongsToMany(Ingredient, { through: MenuItemIngredient, as: 'menuIngredients' });
-Ingredient.belongsToMany(MenuItem, { through: MenuItemIngredient, as: 'ingredientMenus' });
+// MenuItem.belongsToMany(Ingredient, { through: MenuItemIngredient, as: 'menuIngredients' });
+// Ingredient.belongsToMany(MenuItem, { through: MenuItemIngredient, as: 'ingredientMenus' });
+
+MenuItem.belongsToMany(Ingredient, { through: MenuItemIngredient, as: 'Ingredients' });
+Ingredient.belongsToMany(MenuItem, { through: MenuItemIngredient, as: 'MenuItems' });
