@@ -10,9 +10,36 @@ import {
 
 const router = Router();
 
-router.get('/', authMiddleware, getInventoryItems);
-router.post('/', authMiddleware, addInventoryItem);
-router.put('/:id', authMiddleware, updateInventoryItem);
-router.delete('/:id', authMiddleware, deleteInventoryItem);
+router.get('/', authMiddleware, (req, res, next) => {
+  if (!['root', 'cook'].includes(req.user.role)) {
+    return res.status(403).json({ message: 'Access denied' });
+  }
+  next();
+}, getInventoryItems);
+
+router.post('/', authMiddleware, (req, res, next) => {
+  if (!['root', 'cook'].includes(req.user.role)) {
+    return res.status(403).json({ message: 'Access denied' });
+  }
+  next();
+}, addInventoryItem);
+
+router.put('/:id', authMiddleware, (req, res, next) => {
+  if (!['root', 'cook'].includes(req.user.role)) {
+    return res.status(403).json({ message: 'Access denied' });
+  }
+  next();
+}, updateInventoryItem);
+
+router.delete('/:id', authMiddleware, (req, res, next) => {
+  if (!['root', 'cook'].includes(req.user.role)) {
+    return res.status(403).json({ message: 'Access denied' });
+  }
+  next();
+}, deleteInventoryItem);
+
+// router.post('/', authMiddleware, addInventoryItem);
+// router.put('/:id', authMiddleware, updateInventoryItem);
+// router.delete('/:id', authMiddleware, deleteInventoryItem);
 
 export default router;

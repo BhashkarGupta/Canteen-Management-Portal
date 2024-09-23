@@ -7,6 +7,7 @@ import orderRoutes from './routes/orderRoutes.js';
 import venueRoutes from './routes/venueRoutes.js';
 import venueBookingRoutes from './routes/venueBookingRoutes.js';
 import inventoryRoutes from './routes/inventoryRoutes.js';
+import recipeRoutes from './routes/recipeRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 2100;
@@ -35,6 +36,7 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/venues', venueRoutes);
 app.use('/api/venue-bookings', venueBookingRoutes);
 app.use('/api/inventory', inventoryRoutes);
+app.use('/api/recipes', recipeRoutes);
 
 // Start server
 app.listen(PORT, () => {

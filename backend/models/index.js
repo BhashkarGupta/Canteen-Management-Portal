@@ -6,6 +6,7 @@ import OrderItem from './OrderItem.js';
 import Venue from './Venue.js';
 import VenueBooking from './VenueBooking.js';
 import InventoryItem from './InventoryItem.js';
+import MenuItemIngredient from './MenuItemIngredient.js';
 
 
 // User Associations
@@ -26,6 +27,21 @@ VenueBooking.belongsTo(User, { foreignKey: 'user_id' });
 Venue.hasMany(VenueBooking, { foreignKey: 'venue_id' });
 VenueBooking.belongsTo(Venue, { foreignKey: 'venue_id' });
 
+
+// MenuItemIngredient Associations
+MenuItem.belongsToMany(InventoryItem, {
+  through: MenuItemIngredient,
+  foreignKey: 'menu_item_id',
+});
+
+InventoryItem.belongsToMany(MenuItem, {
+  through: MenuItemIngredient,
+  foreignKey: 'inventory_item_id',
+});
+
+MenuItemIngredient.belongsTo(MenuItem, { foreignKey: 'menu_item_id' });
+MenuItemIngredient.belongsTo(InventoryItem, { foreignKey: 'inventory_item_id' });
+
 // Export all models
 export {
   User,
@@ -35,4 +51,5 @@ export {
   Venue,
   VenueBooking,
   InventoryItem,
+  MenuItemIngredient,
 };
