@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';  // Add useNavigate hook
 import { login } from '../services/authService';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const navigate = useNavigate();  // Initialize the navigate function
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await login(email, password);
-      navigate('/menu');  // Redirect on successful login
+      navigate('/');  // Redirect to the homepage after login
     } catch (err) {
       setError('Invalid email or password');
     }
