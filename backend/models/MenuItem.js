@@ -1,6 +1,7 @@
 // models/MenuItem.js
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/db.js';
+import OrderItem from '../models/OrderItem.js';
 
 const MenuItem = sequelize.define(
   'MenuItem',
@@ -43,5 +44,7 @@ const MenuItem = sequelize.define(
     tableName: 'Menu_Items',
   }
 );
+
+MenuItem.hasMany(OrderItem, { foreignKey: 'menu_item_id' });
 
 export default MenuItem;
