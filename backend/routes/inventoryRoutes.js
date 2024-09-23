@@ -1,6 +1,7 @@
 // routes/inventoryRoutes.js
 import { Router } from 'express';
 import { authMiddleware } from '../middleware/authMiddleware.js';
+import { allowRoles } from '../middleware/roleMiddleware.js';
 import {
   getInventoryItems,
   addInventoryItem,
@@ -10,33 +11,17 @@ import {
 
 const router = Router();
 
-router.get('/', authMiddleware, (req, res, next) => {
-  if (!['root', 'cook'].includes(req.user.role)) {
-    return res.status(403).json({ message: 'Access denied' });
-  }
-  next();
-}, getInventoryItems);
+// Get all inventory items
+router.get('/', authMiddleware, allowRoles(['root', 'cook']), getInventoryItems);
 
-router.post('/', authMiddleware, (req, res, next) => {
-  if (!['root', 'cook'].includes(req.user.role)) {
-    return res.status(403).json({ message: 'Access denied' });
-  }
-  next();
-}, addInventoryItem);
+// Add a new inventory item
+router.post('/', allowRoles(['root', 'cook']), addInventoryItem);
 
-router.put('/:id', authMiddleware, (req, res, next) => {
-  if (!['root', 'cook'].includes(req.user.role)) {
-    return res.status(403).json({ message: 'Access denied' });
-  }
-  next();
-}, updateInventoryItem);
+// Update an inventory item
+router.put('/:id', allowRoles(['root', 'cook']), updateInventoryItem);
 
-router.delete('/:id', authMiddleware, (req, res, next) => {
-  if (!['root', 'cook'].includes(req.user.role)) {
-    return res.status(403).json({ message: 'Access denied' });
-  }
-  next();
-}, deleteInventoryItem);
+// Delete an inventory item
+router.delete('/:id', allowRoles(['root', 'cook']), deleteInventoryItem);
 
 // router.post('/', authMiddleware, addInventoryItem);
 // router.put('/:id', authMiddleware, updateInventoryItem);
