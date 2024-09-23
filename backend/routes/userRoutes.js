@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { registerUser, loginUser } from '../controllers/userController.js';
+import { registerUser, loginUser, resetUserPassword,} from '../controllers/userController.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
+import { allowRoles } from '../middleware/roleMiddleware.js';
 import User from '../models/User.js';
 
 
@@ -22,5 +23,13 @@ router.get('/profile', authMiddleware, async (req, res) => {
       console.log(error);
     }
   });
+
+// Reset User Password
+router.put(
+  '/:id/reset-password',
+  authMiddleware,
+  allowRoles(['root', 'admin']),
+  resetUserPassword
+);
 
 export default router;

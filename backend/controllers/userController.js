@@ -2,41 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 
-// export const registerUser = async (req, res) => {
-//   try {
-//     const { name, employee_id, email, password, address, contact_number } = req.body;
-
-//     // Check if user already exists
-//     const existingUser = await User.findOne({ where: { email } });
-//     if (existingUser) {
-//       return res.status(400).json({ message: 'User already exists' });
-//     }
-
-//     // Hash password
-//     const salt = await bcrypt.genSalt(10);
-//     const password_hash = await bcrypt.hash(password, salt);
-
-//     // Create user
-//     const user = await User.create({
-//       name,
-//       employee_id,
-//       email,
-//       password_hash,
-//       address,
-//       contact_number,
-//     });
-
-//     // Generate JWT token
-//     const payload = { userId: user.id, role: user.role };
-//     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-//     res.status(201).json({ token, message: 'User registered successfully' });
-//   } catch (error) {
-//     console.error('Registration error:', error);
-//     res.status(500).json({ message: 'Server error' });
-//   }
-// };
-
+// Register a new user
 export const registerUser = async (req, res) => {
   try {
     const {
@@ -81,6 +47,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
+// Login
 export const loginUser = async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -107,4 +74,79 @@ export const loginUser = async (req, res) => {
       res.status(500).json({ message: 'Server error' });
     }
   };
-  
+
+// Reset User Password
+export const resetUserPassword = async (req, res) => {
+  try {
+    const { id } = req.params; // ID of the user whose password is to be reset
+    const { newPassword } = req.body;
+
+    // Find the target user
+    const targetUser = await User.findByPk(id);
+    if (!targetUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Get roles
+    const currentUserRole = req.user.role;
+    const targetUserRole = targetUser.role;
+
+    // Access Control
+    if (currentUserRole === 'root') {
+      // Root can reset passwords for all users
+    } else if (currentUserRole === 'admin') {
+      if (targetUserRole !== 'user') {
+        return res.status(403).json({ message: 'Access denied' });
+      }
+    } else {
+      return res.status(403).json({ message: 'Access denied' });
+    }
+
+    // Hash new password
+    const salt = await bcrypt.genSalt(10);
+    const password_hash = await bcrypt.hash(newPassword, salt);
+
+    // Update user's password
+    await targetUser.update({ password_hash });
+
+    res.json({ message: 'Password reset successful' });
+  } catch (error) {
+    console.error('Password reset error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+  // export const registerUser = async (req, res) => {
+//   try {
+//     const { name, employee_id, email, password, address, contact_number } = req.body;
+
+//     // Check if user already exists
+//     const existingUser = await User.findOne({ where: { email } });
+//     if (existingUser) {
+//       return res.status(400).json({ message: 'User already exists' });
+//     }
+
+//     // Hash password
+//     const salt = await bcrypt.genSalt(10);
+//     const password_hash = await bcrypt.hash(password, salt);
+
+//     // Create user
+//     const user = await User.create({
+//       name,
+//       employee_id,
+//       email,
+//       password_hash,
+//       address,
+//       contact_number,
+//     });
+
+//     // Generate JWT token
+//     const payload = { userId: user.id, role: user.role };
+//     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+//     res.status(201).json({ token, message: 'User registered successfully' });
+//   } catch (error) {
+//     console.error('Registration error:', error);
+//     res.status(500).json({ message: 'Server error' });
+//   }
+// };
