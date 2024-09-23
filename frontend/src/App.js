@@ -1,28 +1,25 @@
-// frontend/src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
-import AppNavbar from './components/Navbar'; // Use the correct import for Navbar
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Menu from './pages/Menu';
-import Bookings from './pages/Bookings';
-import OrderHistory from './pages/OrderHistory';
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
-    <Router>
-      <AppNavbar />
-      <Container className="mt-4">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/bookings" element={<Bookings />} />
-          <Route path="/order-history" element={<OrderHistory />} />
-        </Routes>
-      </Container>
-    </Router>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
 }
 

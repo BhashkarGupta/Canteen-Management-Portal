@@ -1,1 +1,0 @@
-// Venue booking tests
