@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { registerUser, loginUser, resetUserPassword,} from '../controllers/userController.js';
+import { registerUser, loginUser, resetUserPassword,changePassword,} from '../controllers/userController.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
 import { allowRoles } from '../middleware/roleMiddleware.js';
 import User from '../models/User.js';
@@ -30,6 +30,13 @@ router.put(
   authMiddleware,
   allowRoles(['root', 'admin']),
   resetUserPassword
+);
+
+// Change Password (Authenticated Users)
+router.put(
+  '/change-password',
+  authMiddleware,
+  changePassword
 );
 
 export default router;
