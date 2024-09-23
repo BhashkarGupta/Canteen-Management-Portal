@@ -14,7 +14,7 @@ export const getMenuItems = async (req, res) => {
 // Add a new menu item (Admin or Cook)
 export const addMenuItem = async (req, res) => {
   try {
-    if (!['admin', 'cook'].includes(req.user.role)) {
+    if (!['root', 'cook'].includes(req.user.role)) {
       return res.status(403).json({ message: 'Access denied' });
     }
 
@@ -35,7 +35,7 @@ export const addMenuItem = async (req, res) => {
 // Update a menu item (Admin or Cook)
 export const updateMenuItem = async (req, res) => {
   try {
-    if (!['admin', 'cook'].includes(req.user.role)) {
+    if (!['root', 'cook'].includes(req.user.role)) {
       return res.status(403).json({ message: 'Access denied' });
     }
 
@@ -50,7 +50,7 @@ export const updateMenuItem = async (req, res) => {
 // Delete a menu item (Admin or Cook)
 export const deleteMenuItem = async (req, res) => {
   try {
-    if (!['admin', 'cook'].includes(req.user.role)) {
+    if (!['root', 'cook'].includes(req.user.role)) {
       return res.status(403).json({ message: 'Access denied' });
     }
 
