@@ -138,6 +138,14 @@ export const changePassword = async (req, res) => {
       return res.status(400).json({ message: 'Current password is incorrect' });
     }
 
+    // Check password strength
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    if (!passwordRegex.test(newPassword)) {
+      return res.status(400).json({
+        message: 'New password must be at least 8 characters long and include uppercase letters, lowercase letters, and numbers',
+      });
+    }
+    
     // Hash new password
     const salt = await bcrypt.genSalt(10);
     const password_hash = await bcrypt.hash(newPassword, salt);
