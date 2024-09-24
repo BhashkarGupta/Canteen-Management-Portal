@@ -17,6 +17,7 @@ import ratingRoutes from './routes/ratingRoutes.js';
 import profileRoutes from './routes/profileRoutes.js';
 import venueFeedbackRoutes from './routes/venueFeedbackRoutes.js';
 import { startInventoryCron } from './utils/inventoryCron.js';
+import weeklyMenuRoutes from './routes/weeklyMenuRoutes.js';
  
 
 const app = express();
@@ -66,6 +67,7 @@ app.use('/api/feedback', feedbackRoutes); // Feedback Routes
 app.use('/api/ratings', ratingRoutes); // Rating Routes
 app.use('/api/profile', profileRoutes); // Profile Routes
 app.use('/api/venue-feedback', venueFeedbackRoutes);// Venue Feedback Routes
+app.use('/api/weekly-menu', weeklyMenuRoutes);
 
 // Start inventory cron job
 startInventoryCron();

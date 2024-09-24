@@ -11,6 +11,7 @@ import Announcement from './Announcement.js';
 import Feedback from './Feedback.js';
 import Rating from './Rating.js';
 import VenueFeedback from './VenueFeedback.js';
+import WeeklyMenu from './WeeklyMenu.js';
 
 
 // User Associations
@@ -76,5 +77,6 @@ export {
   Announcement,
   Feedback,
   Rating,
-  VenueFeedback, 
+  VenueFeedback,
+  WeeklyMenu  
 };

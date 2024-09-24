@@ -30,6 +30,12 @@ const Navbar = () => {
                 <li className="nav-item">
                   <Link className="nav-link" to="/dashboard">Dashboard</Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/menu">Menu</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/weekly-menu">Weekly Menu</Link>
+                </li>
                 {/* Admin and Root Links */}
                 {(user.role === 'admin' || user.role === 'root') && (
                   <>

@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const Dashboard = () => {
-  const [todayMenu, setTodayMenu] = useState([]);
+const MenuPage = () => {
+  const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchTodayMenu = async () => {
+    const fetchMenuItems = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/weekly-menu/today`);
-        setTodayMenu(response.data);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/menu`);
+        setMenuItems(response.data);
         setLoading(false);
       } catch (error) {
-        setError('Failed to fetch today\'s menu.');
+        setError('Failed to fetch menu items.');
         setLoading(false);
       }
     };
-    fetchTodayMenu();
+    fetchMenuItems();
   }, []);
 
-  if (loading) return <p>Loading today\'s menu...</p>;
+  if (loading) return <p>Loading menu...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div className="container mt-5">
       <h2>Today's Menu</h2>
       <div className="row">
-        {todayMenu.length > 0 ? (
-          todayMenu.map(item => (
+        {menuItems.length > 0 ? (
+          menuItems.map(item => (
             <div className="col-md-4 mb-3" key={item.id}>
               <div className="card h-100">
                 <div className="card-body">
@@ -41,11 +41,11 @@ const Dashboard = () => {
             </div>
           ))
         ) : (
-          <p>No menu items available for today.</p>
+          <p>No menu items available.</p>
         )}
       </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default MenuPage;

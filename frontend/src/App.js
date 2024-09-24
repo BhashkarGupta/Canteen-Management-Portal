@@ -8,6 +8,8 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
+import MenuPage from './pages/MenuPage';
+import WeeklyMenuPage from './pages/WeeklyMenuPage';
 
 const App = () => {
   return (
@@ -15,10 +17,13 @@ const App = () => {
       <ToastContainer />
       <Navbar />
       <Routes>
+        <Route path="/menu" element={<MenuPage />} />
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/weekly-menu" element={<WeeklyMenuPage />} />
+
         {/* Protected Routes */}
         <Route
           path="/dashboard"
@@ -28,7 +33,7 @@ const App = () => {
             </PrivateRoute>
           }
         />
-        
+
         {/* Add more routes as needed */}
       </Routes>
     </>
