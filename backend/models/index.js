@@ -10,6 +10,7 @@ import MenuItemIngredient from './MenuItemIngredient.js';
 import Announcement from './Announcement.js';
 import Feedback from './Feedback.js';
 import Rating from './Rating.js';
+import VenueFeedback from './VenueFeedback.js';
 
 
 // User Associations
@@ -25,6 +26,11 @@ Feedback.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 User.hasMany(Rating, { foreignKey: 'user_id', as: 'ratings' });
 Rating.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 
+VenueFeedback.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+User.hasMany(VenueFeedback, { foreignKey: 'user_id', as: 'venueFeedbacks' });
+
+VenueFeedback.belongsTo(Venue, { foreignKey: 'venue_id', as: 'venue' });
+Venue.hasMany(VenueFeedback, { foreignKey: 'venue_id', as: 'feedbacks' });
 
 // Order Associations
 Order.hasMany(OrderItem, { foreignKey: 'order_id' });
@@ -70,4 +76,5 @@ export {
   Announcement,
   Feedback,
   Rating,
+  VenueFeedback, 
 };
