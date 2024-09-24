@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { MdFastfood } from 'react-icons/md'; // Food icon
 
 const WeeklyMenuPage = () => {
-  const [weeklyMenu, setWeeklyMenu] = useState({});
+  const [weeklyMenu, setWeeklyMenu] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Fetch weekly menu
     const fetchWeeklyMenu = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/weekly-menu/week`);
@@ -17,6 +19,7 @@ const WeeklyMenuPage = () => {
         setLoading(false);
       }
     };
+
     fetchWeeklyMenu();
   }, []);
 
@@ -25,22 +28,31 @@ const WeeklyMenuPage = () => {
 
   return (
     <div className="container mt-5">
-      <h2>Weekly Menu</h2>
-      {Object.keys(weeklyMenu).length > 0 ? (
-        Object.keys(weeklyMenu).map(day => (
-          <div key={day}>
-            <h4>{day}</h4>
-            <ul className="list-group mb-3">
-              {weeklyMenu[day].map(item => (
-                <li key={item.id} className="list-group-item">
-                  {item.name} - ₹{item.price}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
+      <h3 className="mb-4">
+        <MdFastfood size={30} className="me-2" /> Weekly Menu
+      </h3>
+
+      {weeklyMenu.length > 0 ? (
+        <div className="row">
+          {weeklyMenu.map((dayMenu, index) => (
+            <div className="col-md-4 mb-4" key={index}>
+              <div className="card shadow-sm h-100">
+                <div className="card-body">
+                  <h5 className="card-title">Day: {dayMenu.day}</h5>
+                  <ul className="list-group">
+                    {dayMenu.menuItems.map(menuItem => (
+                      <li key={menuItem.id} className="list-group-item">
+                        {menuItem.name} - ₹{menuItem.price}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       ) : (
-        <p>No menu items available for the week.</p>
+        <p>No weekly menu available at the moment.</p>
       )}
     </div>
   );

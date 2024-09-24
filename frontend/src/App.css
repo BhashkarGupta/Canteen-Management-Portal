@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.hover-card:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
+}
