@@ -1,4 +1,7 @@
 import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import { sequelize, connectDB } from './config/db.js';
 import { User, MenuItem, Order, OrderItem, Venue, VenueBooking, InventoryItem, MenuItemIngredient, Announcement, Feedback, Rating, VenueFeedback } from './models/index.js';
 import userRoutes from './routes/userRoutes.js';
@@ -13,12 +16,27 @@ import feedbackRoutes from './routes/feedbackRoutes.js';
 import ratingRoutes from './routes/ratingRoutes.js';
 import profileRoutes from './routes/profileRoutes.js';
 import venueFeedbackRoutes from './routes/venueFeedbackRoutes.js';
+import { startInventoryCron } from './utils/inventoryCron.js';
  
 
 const app = express();
 const PORT = process.env.PORT || 2100;
 
+app.use(helmet()); // for securing HTTP Headers
+
 app.use(express.json());
+app.use(cors({
+  origin: 'http://localhost:3000', // frontend URL for communication
+  credentials: true,
+}));
+
+// For rate limiting api request from same IP ( prevent brute force upto certain extent)
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP, please try again after 15 minutes',
+});
+app.use(limiter);
 
 // Connect Database
 connectDB();
@@ -48,6 +66,9 @@ app.use('/api/feedback', feedbackRoutes); // Feedback Routes
 app.use('/api/ratings', ratingRoutes); // Rating Routes
 app.use('/api/profile', profileRoutes); // Profile Routes
 app.use('/api/venue-feedback', venueFeedbackRoutes);// Venue Feedback Routes
+
+// Start inventory cron job
+startInventoryCron();
 
 // Start server
 app.listen(PORT, () => {

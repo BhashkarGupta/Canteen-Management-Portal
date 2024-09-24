@@ -6,6 +6,7 @@ import MenuItem from '../models/MenuItem.js';
 import User from '../models/User.js';
 import MenuItemIngredient from '../models/MenuItemIngredient.js';
 import InventoryItem from '../models/InventoryItem.js';
+import { sendLowInventoryAlert } from '../utils/emailService.js';
 
 // Place an order
 export const placeOrder = async (req, res) => {
@@ -68,7 +69,7 @@ export const placeOrder = async (req, res) => {
       }
     }
 
-    // Deduct inventory
+      // Deduct inventory and check thresholds
     for (const inventoryItemId in inventoryUsage) {
       const requiredQuantity = inventoryUsage[inventoryItemId];
       const inventoryItem = await InventoryItem.findByPk(inventoryItemId);
@@ -77,6 +78,12 @@ export const placeOrder = async (req, res) => {
         { quantity: inventoryItem.quantity - requiredQuantity },
         { transaction }
       );
+
+      // Check if inventory is below threshold
+      if (inventoryItem.quantity - requiredQuantity < inventoryItem.threshold) {
+        // Trigger alert
+        await sendLowInventoryAlert(inventoryItem.item_name, inventoryItem.quantity - requiredQuantity);
+      }
     }
 
     // Create order
