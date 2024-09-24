@@ -8,115 +8,6 @@ import MenuItemIngredient from '../models/MenuItemIngredient.js';
 import InventoryItem from '../models/InventoryItem.js';
 import { sendLowInventoryAlert } from '../utils/emailService.js';
 
-// // Place an order
-// export const placeOrder = async (req, res) => {
-//   const transaction = await sequelize.transaction();
-//   try {
-//     const { items } = req.body; // items: [{ menu_item_id, quantity }]
-
-//     if (!items || items.length === 0) {
-//       await transaction.rollback();
-//       return res.status(400).json({ message: 'No items to order' });
-//     }
-
-//     let totalAmount = 0;
-//     const orderItems = [];
-//     const inventoryUsage = {};
-
-//     for (const item of items) {
-//       const menuItem = await MenuItem.findByPk(item.menu_item_id);
-//       if (!menuItem || menuItem.availability !== 'available') {
-//         await transaction.rollback();
-//         return res.status(400).json({ message: 'Invalid menu item selected' });
-//       }
-
-//       const price = parseFloat(menuItem.price) * item.quantity;
-//       totalAmount += price;
-
-//       orderItems.push({
-//         menu_item_id: item.menu_item_id,
-//         quantity: item.quantity,
-//         price: menuItem.price,
-//       });
-
-//       // Get ingredients for the menu item
-//       const ingredients = await MenuItemIngredient.findAll({
-//         where: { menu_item_id: item.menu_item_id },
-//       });
-
-//       for (const ingredient of ingredients) {
-//         const inventoryItemId = ingredient.inventory_item_id;
-//         const requiredQuantity = ingredient.quantity_required * item.quantity;
-
-//         if (!inventoryUsage[inventoryItemId]) {
-//           inventoryUsage[inventoryItemId] = requiredQuantity;
-//         } else {
-//           inventoryUsage[inventoryItemId] += requiredQuantity;
-//         }
-//       }
-//     }
-
-//     // Check inventory levels
-//     for (const inventoryItemId in inventoryUsage) {
-//       const requiredQuantity = inventoryUsage[inventoryItemId];
-//       const inventoryItem = await InventoryItem.findByPk(inventoryItemId);
-
-//       if (!inventoryItem || inventoryItem.quantity < requiredQuantity) {
-//         await transaction.rollback();
-//         return res.status(400).json({
-//           message: `Insufficient inventory for item: ${inventoryItem?.item_name || 'Unknown'}`,
-//         });
-//       }
-//     }
-
-//       // Deduct inventory and check thresholds
-//     for (const inventoryItemId in inventoryUsage) {
-//       const requiredQuantity = inventoryUsage[inventoryItemId];
-//       const inventoryItem = await InventoryItem.findByPk(inventoryItemId);
-
-//       await inventoryItem.update(
-//         { quantity: inventoryItem.quantity - requiredQuantity },
-//         { transaction }
-//       );
-
-//       // Check if inventory is below threshold
-//       if (inventoryItem.quantity - requiredQuantity < inventoryItem.threshold) {
-//         // Trigger alert
-//         await sendLowInventoryAlert(inventoryItem.item_name, inventoryItem.quantity - requiredQuantity);
-//       }
-//     }
-
-//     // Create order
-//     const order = await Order.create(
-//       {
-//         user_id: req.user.userId,
-//         total_amount: totalAmount.toFixed(2),
-//       },
-//       { transaction }
-//     );
-
-//     // Create order items
-//     for (const item of orderItems) {
-//       await OrderItem.create(
-//         {
-//           order_id: order.id,
-//           menu_item_id: item.menu_item_id,
-//           quantity: item.quantity,
-//           price: item.price,
-//         },
-//         { transaction }
-//       );
-//     }
-
-//     await transaction.commit();
-//     res.status(201).json({ message: 'Order placed successfully', orderId: order.id });
-//   } catch (error) {
-//     await transaction.rollback();
-//     console.error('Place order error:', error);
-//     res.status(500).json({ message: 'Server error' });
-//   }
-// };
-
 // Place an order with credit deduction and allow negative balance
 export const placeOrder = async (req, res) => {
   const transaction = await sequelize.transaction();
@@ -208,11 +99,9 @@ export const placeOrder = async (req, res) => {
     await user.update({ credit_balance: newBalance }, { transaction });
 
     // Check if balance is negative and send alert
-    if (newBalance < 0) {
-      // Send an alert to notify admin or user about the negative balance
-      // You can implement the alert logic here, e.g., sending an email or notification
-      console.log('Alert: User has a negative credit balance.');
-    }
+    // if (newBalance < 0) {
+    //   console.log('Alert: User has a negative credit balance.');
+    // }
 
     // Create the order
     const order = await Order.create(
