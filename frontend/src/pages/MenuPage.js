@@ -6,7 +6,7 @@ import { MdFastfood } from 'react-icons/md'; // Icon for food
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]); // For search/filter
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
   const [searchTerm, setSearchTerm] = useState(''); // Search state
   const [categoryFilter, setCategoryFilter] = useState(''); // Category filter state
@@ -32,34 +32,40 @@ const MenuPage = () => {
     fetchMenuItems();
   }, []);
 
-  // Handle checkbox selection for menu items
-  const handleCheckboxChange = (menuItem, isChecked) => {
-    let updatedItems = [...selectedItems];
-    let updatedPrice = totalPrice;
-
-    if (isChecked) {
-      updatedItems.push(menuItem);
-      updatedPrice += parseFloat(menuItem.price);
+  // Handle checkbox selection and quantity input for menu items
+  const handleItemSelection = (menuItemId, price, quantity) => {
+    const selected = { ...selectedItems };
+    
+    if (quantity === 0) {
+      delete selected[menuItemId]; // Remove item if quantity is 0
     } else {
-      updatedItems = updatedItems.filter(item => item.id !== menuItem.id);
-      updatedPrice -= parseFloat(menuItem.price);
+      selected[menuItemId] = { price, quantity };
     }
 
-    setSelectedItems(updatedItems);
-    setTotalPrice(Math.max(0, updatedPrice));
+    setSelectedItems(selected);
+    updateTotalPrice(selected);
+  };
+
+  // Update total price based on selected items
+  const updateTotalPrice = (selected) => {
+    const newTotalPrice = Object.values(selected).reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+    setTotalPrice(newTotalPrice);
   };
 
   // Place order function
   const handlePlaceOrder = async () => {
-    const orderItems = selectedItems.map(item => ({
-      menu_item_id: item.id,
-      quantity: 1,
+    const orderItems = Object.entries(selectedItems).map(([menuItemId, { quantity }]) => ({
+      menu_item_id: parseInt(menuItemId),
+      quantity,
     }));
 
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/orders`, { items: orderItems });
       alert('Order placed successfully');
-      setSelectedItems([]);
+      setSelectedItems({});
       setTotalPrice(0);
     } catch (error) {
       alert('Failed to place order. Please try again.');
@@ -149,17 +155,16 @@ const MenuPage = () => {
                   <p className="card-text">{item.description}</p>
                   <p><strong>Price:</strong> ₹{item.price}</p>
                   {item.availability === 'available' ? (
-                    <div className="form-check">
+                    <div>
+                      <label htmlFor={`quantity-${item.id}`}>Quantity:</label>
                       <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id={`menuItem-${item.id}`}
-                        onChange={e => handleCheckboxChange(item, e.target.checked)}
-                        checked={selectedItems.some(selectedItem => selectedItem.id === item.id)}
+                        type="number"
+                        min="0"
+                        className="form-control mb-3"
+                        id={`quantity-${item.id}`}
+                        value={selectedItems[item.id]?.quantity || 0}
+                        onChange={(e) => handleItemSelection(item.id, item.price, parseInt(e.target.value, 10))}
                       />
-                      <label className="form-check-label" htmlFor={`menuItem-${item.id}`}>
-                        Select
-                      </label>
                     </div>
                   ) : (
                     <p className="text-danger">
@@ -189,13 +194,14 @@ const MenuPage = () => {
       </nav>
 
       {/* Order Summary and Place Order Button */}
-      {selectedItems.length > 0 && (
+      {Object.keys(selectedItems).length > 0 && (
         <div className="mt-4">
           <h4>Order Summary</h4>
           <ul className="list-group mb-3">
-            {selectedItems.map(item => (
-              <li key={item.id} className="list-group-item d-flex justify-content-between">
-                {item.name} <span>₹{item.price}</span>
+            {Object.entries(selectedItems).map(([menuItemId, { quantity, price }]) => (
+              <li key={menuItemId} className="list-group-item d-flex justify-content-between">
+                {menuItems.find(item => item.id === parseInt(menuItemId))?.name} (x{quantity}) 
+                <span>₹{price * quantity}</span>
               </li>
             ))}
           </ul>

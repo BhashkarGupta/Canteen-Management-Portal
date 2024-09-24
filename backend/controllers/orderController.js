@@ -203,5 +203,6 @@ export const updateOrderStatus = async (req, res) => {
   } catch (error) {
     console.error('Update order status error:', error);
     res.status(500).json({ message: 'Server error' });
+    console.error(error)
   }
 };

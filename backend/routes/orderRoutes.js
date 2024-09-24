@@ -25,7 +25,7 @@ router.get('/', authMiddleware, allowRoles(['root', 'cook', 'admin']), getAllOrd
 
 // Update order status (Root and Cook)
 // router.put('/:id/status', authMiddleware, updateOrderStatus);
-router.put('/:id/status', allowRoles(['root', 'cook']), updateOrderStatus);
+router.put('/:id/status', authMiddleware, allowRoles(['root', 'cook']), updateOrderStatus);
 
 export default router;
 
