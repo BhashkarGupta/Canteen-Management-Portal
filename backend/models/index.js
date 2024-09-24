@@ -7,11 +7,15 @@ import Venue from './Venue.js';
 import VenueBooking from './VenueBooking.js';
 import InventoryItem from './InventoryItem.js';
 import MenuItemIngredient from './MenuItemIngredient.js';
+import Announcement from './Announcement.js';
 
 
 // User Associations
 User.hasMany(Order, { foreignKey: 'user_id' });
 Order.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Announcement, { foreignKey: 'created_by', as: 'announcements' });
+Announcement.belongsTo(User, { foreignKey: 'created_by', as: 'creator' });
+
 
 // Order Associations
 Order.hasMany(OrderItem, { foreignKey: 'order_id' });
@@ -52,4 +56,5 @@ export {
   VenueBooking,
   InventoryItem,
   MenuItemIngredient,
+  Announcement,
 };

@@ -1,6 +1,6 @@
 import express from 'express';
 import { sequelize, connectDB } from './config/db.js';
-import { User, MenuItem, Order, OrderItem, Venue, VenueBooking } from './models/index.js';
+import { User, MenuItem, Order, OrderItem, Venue, VenueBooking, InventoryItem, MenuItemIngredient, Announcement } from './models/index.js';
 import userRoutes from './routes/userRoutes.js';
 import menuRoutes from './routes/menuRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
@@ -8,6 +8,7 @@ import venueRoutes from './routes/venueRoutes.js';
 import venueBookingRoutes from './routes/venueBookingRoutes.js';
 import inventoryRoutes from './routes/inventoryRoutes.js';
 import recipeRoutes from './routes/recipeRoutes.js';
+import announcementRoutes from './routes/announcementRoutes.js'; 
 
 const app = express();
 const PORT = process.env.PORT || 2100;
@@ -37,6 +38,7 @@ app.use('/api/venues', venueRoutes);
 app.use('/api/venue-bookings', venueBookingRoutes);
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/recipes', recipeRoutes);
+app.use('/api/announcements', announcementRoutes);
 
 // Start server
 app.listen(PORT, () => {
