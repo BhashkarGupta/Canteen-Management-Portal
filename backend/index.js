@@ -11,6 +11,8 @@ import recipeRoutes from './routes/recipeRoutes.js';
 import announcementRoutes from './routes/announcementRoutes.js';
 import feedbackRoutes from './routes/feedbackRoutes.js';
 import ratingRoutes from './routes/ratingRoutes.js';
+import profileRoutes from './routes/profileRoutes.js';
+ 
 
 const app = express();
 const PORT = process.env.PORT || 2100;
@@ -43,6 +45,7 @@ app.use('/api/recipes', recipeRoutes);// Use Recipe Routes
 app.use('/api/announcements', announcementRoutes);// Use Announcement Routes
 app.use('/api/feedback', feedbackRoutes); // Use Feedback Routes
 app.use('/api/ratings', ratingRoutes); // Use Rating Routes
+app.use('/api/profile', profileRoutes); // Use Profile Routes
 
 // Start server
 app.listen(PORT, () => {
