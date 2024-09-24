@@ -10,6 +10,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
 import MenuPage from './pages/MenuPage';
 import WeeklyMenuPage from './pages/WeeklyMenuPage';
+import UserProfilePage from './pages/UserProfilePage'; 
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/weekly-menu" element={<WeeklyMenuPage />} />
+        <Route path="/profile" element={<UserProfilePage />} /> 
 
         {/* Protected Routes */}
         <Route
