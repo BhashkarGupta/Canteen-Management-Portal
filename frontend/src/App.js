@@ -19,6 +19,7 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import RootDashboard from './pages/root/RootDashboard';
 import MenuManagementPage from './pages/cook/MenuManagement';
 import InventoryManagementPage from './pages/cook/InventoryManagement';
+import OrderManagementPage from './pages/cook/OrderManagement';
 
 const App = () => {
   return (
@@ -42,6 +43,7 @@ const App = () => {
           <Route path="/root-dashboard" element={<RootDashboard />} />
           <Route path="/menu-management" element={<MenuManagementPage />} />
           <Route path="/inventory-management" element={<InventoryManagementPage />} />
+          <Route path="/order-management" element={<OrderManagementPage />} />
 
           {/* Protected Routes */}
           <Route

@@ -170,7 +170,7 @@ export const getAllOrders = async (req, res) => {
         },
         {
           model: User,
-          attributes: ['name', 'email'],
+          attributes: ['name', 'email', 'contact_number'],
         },
       ],
       order: [['created_at', 'DESC']],
