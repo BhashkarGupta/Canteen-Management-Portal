@@ -21,7 +21,7 @@ router.post('/', authMiddleware, allowRoles(['root', 'cook']), addMenuItem);
 router.put('/:id', authMiddleware, allowRoles(['root', 'cook']), updateMenuItem);
 
 // Delete a menu item
-router.delete('/:id', allowRoles(['root', 'cook']), deleteMenuItem);
+router.delete('/:id', authMiddleware, allowRoles(['root', 'cook']), deleteMenuItem);
 
 
 

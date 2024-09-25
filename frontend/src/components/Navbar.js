@@ -88,6 +88,11 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li className="nav-item">
+                      <Link className="nav-link" to="/menu-management">
+                        Menu Management
+                      </Link>
+                    </li>
+                    <li className="nav-item">
                       <Link className="nav-link" to="/inventory">
                         Manage Inventory
                       </Link>
@@ -102,10 +107,14 @@ const Navbar = () => {
 
                 {/* Links for Admin */}
                 {user.role === 'admin' && (
-                  <>
+                  <><li className="nav-item">
+                    <Link className="nav-link" to="/weekly-menu">
+                      <FaCalendarAlt className="me-1" /> Weekly Menu
+                    </Link>
+                  </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/admin-dashboard">
-                      <FaHome className="me-1" /> Home
+                        <FaHome className="me-1" /> Home
                       </Link>
                     </li>
                     <li className="nav-item">
@@ -126,7 +135,7 @@ const Navbar = () => {
                   <>
                     <li className="nav-item">
                       <Link className="nav-link" to="/root-dashboard">
-                      <FaHome className="me-1" /> Home
+                        <FaHome className="me-1" /> Home
                       </Link>
                     </li>
                     <li className="nav-item">
@@ -152,11 +161,6 @@ const Navbar = () => {
                   </>
                 )}
                 {/* Weekly Menu - Shown to all users */}
-                <li className="nav-item">
-                  <Link className="nav-link" to="/weekly-menu">
-                    <FaCalendarAlt className="me-1" /> Weekly Menu
-                  </Link>
-                </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/profile">
                     <FaUser className="me-1" /> Profile
