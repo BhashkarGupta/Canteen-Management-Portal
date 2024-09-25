@@ -1,4 +1,17 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .App {
+  flex: 1;
   text-align: center;
 }
 
@@ -7,11 +20,20 @@
   pointer-events: none;
 }
 
+.main-content {
+  flex: 1;
+}
+
+.footer {
+  margin-top: auto;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 
 .App-header {
   background-color: #282c34;
@@ -32,6 +54,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

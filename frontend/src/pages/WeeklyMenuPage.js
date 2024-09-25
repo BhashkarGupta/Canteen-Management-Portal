@@ -3,7 +3,7 @@ import axios from 'axios';
 import { MdFastfood } from 'react-icons/md'; // Food icon
 
 const WeeklyMenuPage = () => {
-  const [weeklyMenu, setWeeklyMenu] = useState([]);
+  const [weeklyMenu, setWeeklyMenu] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -11,12 +11,18 @@ const WeeklyMenuPage = () => {
     // Fetch weekly menu
     const fetchWeeklyMenu = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/weekly-menu/week`);
-        setWeeklyMenu(response.data);
+        const token = localStorage.getItem('token'); // Assuming the token is stored in localStorage
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/weekly-menu/week`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setWeeklyMenu(response.data); // Set the menu object
         setLoading(false);
       } catch (error) {
         setError('Failed to fetch weekly menu.');
         setLoading(false);
+        console.log(error);
       }
     };
 
@@ -32,15 +38,15 @@ const WeeklyMenuPage = () => {
         <MdFastfood size={30} className="me-2" /> Weekly Menu
       </h3>
 
-      {weeklyMenu.length > 0 ? (
+      {Object.keys(weeklyMenu).length > 0 ? (
         <div className="row">
-          {weeklyMenu.map((dayMenu, index) => (
+          {Object.keys(weeklyMenu).map((day, index) => (
             <div className="col-md-4 mb-4" key={index}>
               <div className="card shadow-sm h-100">
                 <div className="card-body">
-                  <h5 className="card-title">Day: {dayMenu.day}</h5>
+                  <h5 className="card-title">{day}</h5>
                   <ul className="list-group">
-                    {dayMenu.menuItems.map(menuItem => (
+                    {weeklyMenu[day].map(menuItem => (
                       <li key={menuItem.id} className="list-group-item">
                         {menuItem.name} - ₹{menuItem.price}
                       </li>
@@ -54,12 +60,6 @@ const WeeklyMenuPage = () => {
       ) : (
         <p>No weekly menu available at the moment.</p>
       )}
-      {/* Footer */}
-      <footer className="footer mt-auto py-3 bg-dark text-white text-center">
-        <div className="container">
-          <span>&copy; {new Date().getFullYear()} Canteen Management Portal</span>
-        </div>
-      </footer>
     </div>
   );
 };
