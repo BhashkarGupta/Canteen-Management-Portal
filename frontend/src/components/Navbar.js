@@ -2,7 +2,9 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import axios from 'axios';
-import { FaHome, FaUser, FaSignInAlt, FaUserPlus, FaSignOutAlt, FaListAlt, FaUtensils, FaCalendarAlt } from 'react-icons/fa'; // Icons
+import { FaHome, FaUser, FaSignInAlt, FaUserPlus, FaSignOutAlt, FaListAlt, FaUtensils, FaCalendarAlt, FaBuilding, FaCommentDots} from 'react-icons/fa'; // Icons
+import { GiMeal } from "react-icons/gi";
+
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext); // Access the user and logout function from the context
@@ -24,7 +26,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">Canteen Portal</Link>
+        <Link className="navbar-brand" to="/"><GiMeal className="me-2" />Canteen Portal</Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -79,7 +81,12 @@ const Navbar = () => {
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/venue-bookings">
-                        Venue Bookings
+                      <FaBuilding className="me-1" />Venue Bookings
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/feedback">
+                      <FaCommentDots className="me-1" />Feedback
                       </Link>
                     </li>
                   </>

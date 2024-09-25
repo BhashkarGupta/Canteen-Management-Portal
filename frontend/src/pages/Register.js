@@ -122,6 +122,12 @@ const Register = () => {
         <button type="submit" className="btn btn-primary">Register</button>
         <button type="button" className="btn btn-secondary ms-2" onClick={() => { reset(); }}>Reset</button>
       </form>
+      {/* Footer */}
+      <footer className="footer mt-auto py-3 bg-dark text-white text-center">
+        <div className="container">
+          <span>&copy; {new Date().getFullYear()} Canteen Management Portal</span>
+        </div>
+      </footer>
     </div>
   );
 };

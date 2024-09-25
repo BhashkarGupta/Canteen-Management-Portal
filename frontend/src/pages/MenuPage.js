@@ -213,8 +213,10 @@ const MenuPage = () => {
       )}
 
       {/* Footer */}
-      <footer className="text-center mt-5">
-        <p>&copy; {new Date().getFullYear()} Canteen Management Portal</p>
+      <footer className="footer mt-auto py-3 bg-dark text-white text-center">
+        <div className="container">
+          <span>&copy; {new Date().getFullYear()} Canteen Management Portal</span>
+        </div>
       </footer>
     </div>
   );
