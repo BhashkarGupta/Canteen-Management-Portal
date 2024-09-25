@@ -11,7 +11,8 @@ import Navbar from './components/Navbar';
 import MenuPage from './pages/MenuPage';
 import WeeklyMenuPage from './pages/WeeklyMenuPage';
 import UserProfilePage from './pages/UserProfilePage';
-import OrderHistoryPage from './pages/OrderHistoryPage'; 
+import OrderHistoryPage from './pages/OrderHistoryPage';
+import VenueBookingPage from './pages/VenueBookingPage';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/weekly-menu" element={<WeeklyMenuPage />} />
         <Route path="/profile" element={<UserProfilePage />} /> 
         <Route path="/orders" element={<OrderHistoryPage />} />
+        <Route path="/venue-bookings" element={<VenueBookingPage />} />
 
         {/* Protected Routes */}
         <Route

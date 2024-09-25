@@ -12,6 +12,7 @@ const OrderHistoryPage = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [searchTerm, setSearchTerm] = useState(''); // For searching orders
+  const [ratings, setRatings] = useState({}); // Store ratings for each menu item
 
   // Fetch order history
   useEffect(() => {
@@ -77,6 +78,42 @@ const OrderHistoryPage = () => {
     setEndDate('');
     setSearchTerm('');
     setFilteredOrders(orders);
+  };
+
+  // Handle rating submission for each menu item
+  const handleRatingChange = (menuItemId, rating) => {
+    setRatings((prevRatings) => ({
+      ...prevRatings,
+      [menuItemId]: rating,
+    }));
+  };
+
+  const handleSubmitRating = async (menuItemId) => {
+    if (ratings[menuItemId]) {
+      try {
+        // Ensure rating is a number
+        const ratingValue = parseInt(ratings[menuItemId], 10);
+        if (!ratingValue || ratingValue < 1 || ratingValue > 5) {
+          alert('Please select a valid rating between 1 and 5.');
+          return;
+        }
+
+        // Log the data to check what's being sent
+        console.log(`Submitting rating for menu_item_id: ${menuItemId} with rating: ${ratingValue}`);
+
+        await axios.post(`${process.env.REACT_APP_API_URL}/ratings`, {
+          menu_item_id: menuItemId,
+          rating: ratingValue,
+        });
+
+        alert('Rating submitted successfully');
+      } catch (error) {
+        console.error('Error submitting rating:', error.response ? error.response.data : error.message);
+        alert('Failed to submit rating. Please try again.');
+      }
+    } else {
+      alert('Please select a rating before submitting.');
+    }
   };
 
   return (
@@ -167,6 +204,30 @@ const OrderHistoryPage = () => {
                   {order.OrderItems.map((item) => (
                     <div key={item.menu_item_id}>
                       {item.MenuItem.name} (x{item.quantity})
+                      {order.status === 'accepted' && (
+                        <div className="mt-2">
+                          <label htmlFor={`rating-${item.menu_item_id}`}>Rate:</label>
+                          <select
+                            id={`rating-${item.menu_item_id}`}
+                            className="form-control"
+                            value={ratings[item.menu_item_id] || ''}
+                            onChange={(e) => handleRatingChange(item.menu_item_id, e.target.value)}
+                          >
+                            <option value="">Select Rating</option>
+                            {[...Array(5)].map((_, index) => (
+                              <option key={index + 1} value={index + 1}>
+                                {index + 1}
+                              </option>
+                            ))}
+                          </select>
+                          <button
+                            className="btn btn-primary mt-2"
+                            onClick={() => handleSubmitRating(item.menu_item_id)}
+                          >
+                            Submit Rating
+                          </button>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </td>
