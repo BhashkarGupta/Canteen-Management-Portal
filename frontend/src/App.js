@@ -21,6 +21,7 @@ import MenuManagementPage from './pages/cook/MenuManagement';
 import InventoryManagementPage from './pages/cook/InventoryManagement';
 import OrderManagementPage from './pages/cook/OrderManagement';
 import VenueManagementPage from './pages/admin/VenueManagement';
+import AnnouncementManagement from './pages/admin/AnnouncementManagement';
 const App = () => {
   return (
     <div id="root">
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="/inventory-management" element={<InventoryManagementPage />} />
           <Route path="/order-management" element={<OrderManagementPage />} />
           <Route path="/venue-management" element={<VenueManagementPage />} />
+          <Route path="/announcement-management" element={<AnnouncementManagement />} />
 
           {/* Protected Routes */}
           <Route

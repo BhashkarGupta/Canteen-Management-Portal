@@ -114,7 +114,7 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/announcements">
+                      <Link className="nav-link" to="/announcement-management">
                         Manage Announcements
                       </Link>
                     </li>
