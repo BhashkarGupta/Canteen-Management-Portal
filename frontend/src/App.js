@@ -14,6 +14,8 @@ import UserProfilePage from './pages/UserProfilePage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
 import VenueBookingPage from './pages/VenueBookingPage';
 import FeedbackPage from './pages/FeedbackPage';
+import CookDashboardPage from './pages/cook/CookDashboardPage';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 const App = () => {
   return (
@@ -32,6 +34,8 @@ const App = () => {
           <Route path="/orders" element={<OrderHistoryPage />} />
           <Route path="/venue-bookings" element={<VenueBookingPage />} />
           <Route path="/feedback" element={<FeedbackPage />} />
+          <Route path="/cook-dashboard" element={<CookDashboardPage />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
 
           {/* Protected Routes */}
           <Route

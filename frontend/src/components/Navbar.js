@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import axios from 'axios';
-import { FaHome, FaUser, FaSignInAlt, FaUserPlus, FaSignOutAlt, FaListAlt, FaUtensils, FaCalendarAlt, FaBuilding, FaCommentDots} from 'react-icons/fa'; // Icons
+import { FaHome, FaUser, FaSignInAlt, FaUserPlus, FaSignOutAlt, FaListAlt, FaUtensils, FaCalendarAlt, FaBuilding, FaCommentDots } from 'react-icons/fa'; // Icons
 import { GiMeal } from "react-icons/gi";
 
 
@@ -40,35 +40,22 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            
+
             {/* Home (Dashboard) - Only for logged in users */}
-            {user && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/dashboard">
-                  <FaHome className="me-1" /> Home
-                </Link>
-              </li>
-            )}
+            {/* {user && (
+              
+            )} */}
 
             {/* If user is logged in, show profile and logout */}
             {user ? (
               <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/profile">
-                    <FaUser className="me-1" /> Profile
-                  </Link>
-                </li>
-
-                {/* Weekly Menu - Shown to all users */}
-                <li className="nav-item">
-                  <Link className="nav-link" to="/weekly-menu">
-                    <FaCalendarAlt className="me-1" /> Weekly Menu
-                  </Link>
-                </li>
-
                 {/* Links for Regular User */}
                 {user.role === 'user' && (
-                  <>
+                  <><li className="nav-item">
+                    <Link className="nav-link" to="/dashboard">
+                      <FaHome className="me-1" /> Home
+                    </Link>
+                  </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/menu">
                         <FaUtensils className="me-1" /> Menu
@@ -81,12 +68,12 @@ const Navbar = () => {
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/venue-bookings">
-                      <FaBuilding className="me-1" />Venue Bookings
+                        <FaBuilding className="me-1" />Venue Bookings
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/feedback">
-                      <FaCommentDots className="me-1" />Feedback
+                        <FaCommentDots className="me-1" />Feedback
                       </Link>
                     </li>
                   </>
@@ -96,8 +83,8 @@ const Navbar = () => {
                 {user.role === 'cook' && (
                   <>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/cook/dashboard">
-                        Cook Dashboard
+                      <Link className="nav-link" to="/cook-dashboard">
+                        <FaHome className="me-1" /> Home
                       </Link>
                     </li>
                     <li className="nav-item">
@@ -117,8 +104,8 @@ const Navbar = () => {
                 {user.role === 'admin' && (
                   <>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/admin/dashboard">
-                        Admin Dashboard
+                      <Link className="nav-link" to="/admin-dashboard">
+                      <FaHome className="me-1" /> Home
                       </Link>
                     </li>
                     <li className="nav-item">
@@ -164,7 +151,17 @@ const Navbar = () => {
                     </li>
                   </>
                 )}
-
+                {/* Weekly Menu - Shown to all users */}
+                <li className="nav-item">
+                  <Link className="nav-link" to="/weekly-menu">
+                    <FaCalendarAlt className="me-1" /> Weekly Menu
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/profile">
+                    <FaUser className="me-1" /> Profile
+                  </Link>
+                </li>
                 {/* Logout Button */}
                 <li className="nav-item">
                   <button className="nav-link btn btn-link text-white" onClick={handleLogout}>
