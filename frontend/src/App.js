@@ -18,6 +18,7 @@ import CookDashboardPage from './pages/cook/CookDashboardPage';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import RootDashboard from './pages/root/RootDashboard';
 import MenuManagementPage from './pages/cook/MenuManagement';
+import InventoryManagementPage from './pages/cook/InventoryManagement';
 
 const App = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/root-dashboard" element={<RootDashboard />} />
           <Route path="/menu-management" element={<MenuManagementPage />} />
+          <Route path="/inventory-management" element={<InventoryManagementPage />} />
 
           {/* Protected Routes */}
           <Route

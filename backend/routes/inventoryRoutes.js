@@ -15,13 +15,13 @@ const router = Router();
 router.get('/', authMiddleware, allowRoles(['root', 'cook']), getInventoryItems);
 
 // Add a new inventory item
-router.post('/', allowRoles(['root', 'cook']), addInventoryItem);
+router.post('/', authMiddleware, allowRoles(['root', 'cook']), addInventoryItem);
 
 // Update an inventory item
-router.put('/:id', allowRoles(['root', 'cook']), updateInventoryItem);
+router.put('/:id', authMiddleware, allowRoles(['root', 'cook']), updateInventoryItem);
 
 // Delete an inventory item
-router.delete('/:id', allowRoles(['root', 'cook']), deleteInventoryItem);
+router.delete('/:id', authMiddleware, allowRoles(['root', 'cook']), deleteInventoryItem);
 
 // router.post('/', authMiddleware, addInventoryItem);
 // router.put('/:id', authMiddleware, updateInventoryItem);
