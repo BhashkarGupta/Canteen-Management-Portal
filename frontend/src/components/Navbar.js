@@ -125,8 +125,8 @@ const Navbar = () => {
                 {user.role === 'root' && (
                   <>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/root/dashboard">
-                        Root Dashboard
+                      <Link className="nav-link" to="/root-dashboard">
+                      <FaHome className="me-1" /> Home
                       </Link>
                     </li>
                     <li className="nav-item">

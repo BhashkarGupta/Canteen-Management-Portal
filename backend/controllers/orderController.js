@@ -158,7 +158,7 @@ export const getOrderHistory = async (req, res) => {
 // Get all orders (For Root and Cook)
 export const getAllOrders = async (req, res) => {
   try {
-    if (!['root', 'cook'].includes(req.user.role)) {
+    if (!['root', 'cook', 'admin'].includes(req.user.role)) {
       return res.status(403).json({ message: 'Access denied' });
     }
 

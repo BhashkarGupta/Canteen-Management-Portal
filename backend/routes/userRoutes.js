@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { registerUser, loginUser, resetUserPassword,changePassword,} from '../controllers/userController.js';
+import { registerUser, loginUser, resetUserPassword,changePassword,registerUserAdmin,registerUserRoot} from '../controllers/userController.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
 import { allowRoles } from '../middleware/roleMiddleware.js';
 import User from '../models/User.js';
@@ -10,6 +10,7 @@ const router = Router();
 // @route   POST /api/users/register
 // @desc    Register a new user
 // @access  Public
+
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.get('/profile', authMiddleware, async (req, res) => {
@@ -23,6 +24,22 @@ router.get('/profile', authMiddleware, async (req, res) => {
       console.log(error);
     }
   });
+
+// Register user, cook, admin, root by root
+router.post(
+  '/register/root',
+  authMiddleware,
+  allowRoles(['root']),
+  registerUserRoot
+);
+
+// Register user, cook, admin by admin
+router.post(
+  '/register/admin',
+  authMiddleware,
+  allowRoles(['root', 'admin']),
+  registerUserAdmin
+);
 
 // Reset User Password
 router.put(

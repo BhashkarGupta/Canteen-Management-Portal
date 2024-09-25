@@ -30,19 +30,23 @@ const AdminDashboard = () => {
       }
     };
 
-    // const fetchOrders = async () => {
-    //   try {
-    //     const response = await axios.get(`${process.env.REACT_APP_API_URL}/orders`, {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`, // Sending Bearer token for authorization
-    //       },
-    //     });
-    //     const todayOrders = response.data.filter(order => format(new Date(order.createdAt), 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd'));
-    //     setOrdersCount(todayOrders.length);
-    //   } catch (error) {
-    //     setError('Failed to fetch orders.');
-    //   }
-    // };
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/orders`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Sending Bearer token for authorization
+          },
+        });
+        const todayOrders = response.data.filter(order =>
+          format(new Date(order.created_at), 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd')
+        );
+        console.log(todayOrders)
+        setOrdersCount(todayOrders.length);
+      } catch (error) {
+        setError('Failed to fetch orders.');
+        console.log(error);
+      }
+    };
 
     const fetchVenueBookings = async () => {
       try {
@@ -74,7 +78,7 @@ const AdminDashboard = () => {
     };
 
     fetchAnnouncements();
-    // fetchOrders();
+    fetchOrders();
     fetchVenueBookings();
     fetchUserProfile();
     setLoading(false);
@@ -104,14 +108,14 @@ const AdminDashboard = () => {
 
   return (
     <div className="container mt-5">
-      <h3 className="mb-4">Welcome, {userName}</h3>
+      <h2 className="mb-4">Welcome {userName}</h2>
 
       {/* Announcements Section */}
       <div className="row">
         <div className="col-md-12">
-          <h5>
+          <h3>
             <FaBell className="me-2" /> Announcements
-          </h5>
+          </h3>
         </div>
         {announcements.length > 0 ? (
           announcements.map(announcement => (
@@ -130,29 +134,32 @@ const AdminDashboard = () => {
         )}
       </div>
 
-      {/* Orders Section */}
-      {/* <div className="row mt-4">
+      <div className="row mb-4">
         <div className="col-md-6">
           <div className="card shadow-sm">
             <div className="card-body">
-              <h5>Today's Orders</h5>
-              <p className="fs-2">{ordersCount}</p>
+              <h4 className="card-title">Today's Orders</h4>
+              <p className="card-text">Number of orders today: {ordersCount}</p>
             </div>
           </div>
         </div>
-      </div> */}
+
+        <div className="col-md-6">
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <h4 className="card-title">Pending Venue Bookings</h4>
+              <p className="card-text">Number of pending bookings: {unapprovedCount}</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Pending Venue Requests */}
       <div className="row mt-4">
         <div className="col-md-12">
-          <h5>
+          <h3>
             <FaClipboardList className="me-2" /> Pending Venue Requests
-          </h5>
-          <div className="card shadow-sm mb-4">
-            <div className="card-body">
-              <p className="fs-4">{unapprovedCount} Unapproved Bookings</p>
-            </div>
-          </div>
+          </h3>
         </div>
 
         {pendingVenues.length > 0 ? (

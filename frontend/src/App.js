@@ -16,6 +16,7 @@ import VenueBookingPage from './pages/VenueBookingPage';
 import FeedbackPage from './pages/FeedbackPage';
 import CookDashboardPage from './pages/cook/CookDashboardPage';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import RootDashboard from './pages/root/RootDashboard';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/feedback" element={<FeedbackPage />} />
           <Route path="/cook-dashboard" element={<CookDashboardPage />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/root-dashboard" element={<RootDashboard />} />
 
           {/* Protected Routes */}
           <Route
