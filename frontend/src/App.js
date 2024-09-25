@@ -20,7 +20,7 @@ import RootDashboard from './pages/root/RootDashboard';
 import MenuManagementPage from './pages/cook/MenuManagement';
 import InventoryManagementPage from './pages/cook/InventoryManagement';
 import OrderManagementPage from './pages/cook/OrderManagement';
-
+import VenueManagementPage from './pages/admin/VenueManagement';
 const App = () => {
   return (
     <div id="root">
@@ -44,6 +44,7 @@ const App = () => {
           <Route path="/menu-management" element={<MenuManagementPage />} />
           <Route path="/inventory-management" element={<InventoryManagementPage />} />
           <Route path="/order-management" element={<OrderManagementPage />} />
+          <Route path="/venue-management" element={<VenueManagementPage />} />
 
           {/* Protected Routes */}
           <Route

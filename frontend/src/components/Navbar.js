@@ -107,11 +107,7 @@ const Navbar = () => {
 
                 {/* Links for Admin */}
                 {user.role === 'admin' && (
-                  <><li className="nav-item">
-                    <Link className="nav-link" to="/weekly-menu">
-                      <FaCalendarAlt className="me-1" /> Weekly Menu
-                    </Link>
-                  </li>
+                  <>
                     <li className="nav-item">
                       <Link className="nav-link" to="/admin-dashboard">
                         <FaHome className="me-1" /> Home
@@ -123,10 +119,15 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/venue-requests">
+                      <Link className="nav-link" to="/venue-management">
                         Manage Venue Requests
                       </Link>
                     </li>
+                    <li className="nav-item">
+                    <Link className="nav-link" to="/weekly-menu">
+                      <FaCalendarAlt className="me-1" /> Weekly Menu
+                    </Link>
+                  </li>
                   </>
                 )}
 

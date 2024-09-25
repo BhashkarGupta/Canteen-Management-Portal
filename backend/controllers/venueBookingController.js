@@ -3,6 +3,7 @@ import VenueBooking from '../models/VenueBooking.js';
 import Venue from '../models/Venue.js';
 import User from '../models/User.js';
 
+// Request Venue Booking
 export const requestVenueBooking = async (req, res) => {
   try {
     const { venue_id, booking_date, start_time, end_time, purpose } = req.body;
@@ -27,6 +28,7 @@ export const requestVenueBooking = async (req, res) => {
   }
 };
 
+// Get User Venue Bookings
 export const getUserVenueBookings = async (req, res) => {
   try {
     const bookings = await VenueBooking.findAll({
@@ -39,6 +41,7 @@ export const getUserVenueBookings = async (req, res) => {
   }
 };
 
+// Update Booking Status
 export const updateBookingStatus = async (req, res) => {
   try {
     if (!['root', 'admin'].includes(req.user.role)) {
@@ -57,13 +60,22 @@ export const updateBookingStatus = async (req, res) => {
   }
 };
 
+// Get All Venue Bookings
 export const getAllVenueBookings = async (req, res) => {
   try {
     if (!['root', 'admin'].includes(req.user.role)) {
       return res.status(403).json({ message: 'Access denied' });
     }
     const bookings = await VenueBooking.findAll({
-      include: [Venue, User],
+      include: [
+        {
+          model: Venue
+        },
+        {
+          model: User,
+          attributes: { exclude: ['password_hash'] }  // Exclude password_hash
+        }
+      ]
     });
     res.json(bookings);
   } catch (error) {
