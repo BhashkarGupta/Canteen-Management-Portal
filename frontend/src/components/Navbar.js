@@ -55,6 +55,11 @@ const Navbar = () => {
                     </Link>
                   </li>
                     <li className="nav-item">
+                      <Link className="nav-link" to="/weekly-menu">
+                        <FaCalendarAlt className="me-1" /> Weekly Menu
+                      </Link>
+                    </li>
+                    <li className="nav-item">
                       <Link className="nav-link" to="/menu">
                         <FaUtensils className="me-1" /> Menu
                       </Link>
