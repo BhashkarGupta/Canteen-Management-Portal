@@ -15,7 +15,9 @@ const UserManagement = () => {
   });
   const [resetEmail, setResetEmail] = useState('');
   const [resetPassword, setResetPassword] = useState('');
+  const [credit, setCredit] = useState('');
   const [showResetModal, setShowResetModal] = useState(false);
+  const [showCreditModal, setShowCreditModal] = useState(false);
   const [currentRole, setCurrentRole] = useState('');
 
   // Check if the logged-in user is an admin or root
@@ -78,6 +80,20 @@ const UserManagement = () => {
       console.error('Error resetting password:', error);
     }
   };
+
+    // Handle credit update
+    const creditUpdate = async () => {
+      try {
+        await axios.put(`${process.env.REACT_APP_API_URL}/users/update-credit`, {
+          email: resetEmail,
+          credit: credit,
+        });
+        alert('Credit updated successfully');
+        setCredit(false);
+      } catch (error) {
+        console.error('Error credit update:', error);
+      }
+    };
 
   return (
     <div className="container mt-5 d-flex justify-content-center">
@@ -170,7 +186,7 @@ const UserManagement = () => {
         {/* Reset Password Button */}
         <Button variant="danger" onClick={() => setShowResetModal(true)}>
           Reset User Password
-        </Button>
+        </Button>{'\t'} 
 
         {/* Reset Password Modal */}
         <Modal show={showResetModal} onHide={() => setShowResetModal(false)}>
@@ -203,6 +219,46 @@ const UserManagement = () => {
             </Button>
             <Button variant="primary" onClick={handleResetPassword}>
               Reset Password
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        {/* Reset Password Button */}
+        <Button variant="danger" onClick={() => setShowCreditModal(true)}>
+          Add Credit
+        </Button>
+
+        {/* Add Credit Modal */}
+        <Modal show={showCreditModal} onHide={() => setShowCreditModal(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add Credit</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form.Group className="mb-3">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter user's email"
+                value={resetEmail}
+                onChange={(e) => setResetEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Credit</Form.Label>
+              <Form.Control
+                type="float"
+                placeholder="Enter credit to be added"
+                value={credit}
+                onChange={(e) => setCredit(e.target.value)}
+              />
+            </Form.Group>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShowCreditModal(false)}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={creditUpdate}>
+              Add Credit
             </Button>
           </Modal.Footer>
         </Modal>

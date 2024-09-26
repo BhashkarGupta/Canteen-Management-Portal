@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { registerUser, loginUser, resetUserPassword,changePassword,registerUserAdmin,registerUserRoot,getAllUsers} from '../controllers/userController.js';
+import { registerUser, loginUser, resetUserPassword,changePassword,registerUserAdmin,registerUserRoot,getAllUsers, updateCredit} from '../controllers/userController.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
 import { allowRoles } from '../middleware/roleMiddleware.js';
 import User from '../models/User.js';
@@ -58,5 +58,8 @@ router.put(
 
 // Fethch all users
 router.get('/get-all-users', authMiddleware, allowRoles(['root', 'admin']), getAllUsers);
+
+// update credit balace
+router.put('/update-credit', authMiddleware, allowRoles(['root', 'admin']), updateCredit);
 
 export default router;

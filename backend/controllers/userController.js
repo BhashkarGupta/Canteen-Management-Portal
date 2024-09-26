@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import { parse } from 'dotenv';
 
 // Register a new user
 export const registerUser = async (req, res) => {
@@ -172,7 +173,6 @@ export const loginUser = async (req, res) => {
 // Reset User Password
 export const resetUserPassword = async (req, res) => {
   try {
-    // const { id } = req.params; // ID of the user whose password is to be reset
     const { email,newPassword } = req.body;
 
     // Find the target user
@@ -261,6 +261,28 @@ export const getAllUsers = async (req, res) => {
     res.json(users);
   } catch (error) {
     console.error('Get all users error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// add credit
+export const updateCredit = async (req, res) => {
+  try {
+    const { email, credit } = req.body;
+
+    // Find the target user
+    const targetUser = await User.findAll({ where: { email: email } });
+    if (!targetUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    const credit_balance = (parseFloat(targetUser[0].credit_balance) + parseFloat(credit)).toString();
+
+    // Update user's credit
+    await targetUser[0].update({ credit_balance});
+
+    res.json({ message: 'Credit balance updated successfully' });
+  } catch (error) {
+    console.error('Credit update error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };

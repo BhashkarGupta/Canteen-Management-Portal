@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import axios from 'axios';
-import { FaHome, FaUser, FaSignInAlt, FaUserPlus, FaSignOutAlt, FaListAlt, FaUtensils, FaCalendarAlt, FaBuilding, FaCommentDots } from 'react-icons/fa'; // Icons
+import { FaHome, FaUser, FaSignInAlt, FaUserPlus, FaSignOutAlt, FaListAlt, FaUtensils, FaCalendarAlt, FaBuilding, FaCommentDots, FaUsers, FaMapMarked, FaMapMarkedAlt, FaMapMarker, FaBullhorn, FaCartArrowDown } from 'react-icons/fa'; // Icons
 import { GiMeal } from "react-icons/gi";
 
 
@@ -89,17 +89,17 @@ const Navbar = () => {
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/menu-management">
-                        Menu Management
+                      <FaUtensils className="me-1" /> Menu
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/inventory-management">
-                        Manage Inventory
+                      <FaCartArrowDown className="me-1" /> Inventory
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/order-management">
-                        Manage Orders
+                      <FaListAlt className="me-1" /> Orders
                       </Link>
                     </li>
                   </>
@@ -115,17 +115,17 @@ const Navbar = () => {
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/announcement-management">
-                        Manage Announcements
+                      <FaBullhorn className="me-1" /> Announcements
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/venue-management">
-                        Manage Venue Requests
+                      <FaMapMarker className="me-1" /> Venue
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/user-management">
-                        User Management
+                      <FaUsers className="me-1" /> Users
                       </Link>
                     </li>
                     <li className="nav-item">
@@ -146,22 +146,32 @@ const Navbar = () => {
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/user-management">
-                        User Management
+                      <FaUsers className="me-1" /> Users
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/veneue-management">
-                        Manage Venue Requests
+                      <Link className="nav-link" to="/menu-management">
+                      <FaUtensils className="me-1" /> Menu
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/announcements-management">
-                        Manage Announcements
+                      <Link className="nav-link" to="/venue-management">
+                      <FaMapMarker className="me-1" /> Venue
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/announcement-management">
+                      <FaBullhorn className="me-1" /> Announcements
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/order-management">
+                      <FaListAlt className="me-1" /> Orders
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/inventory-management">
-                        Manage Inventory
+                      <FaCartArrowDown className="me-1" /> Inventory
                       </Link>
                     </li>
                   </>
