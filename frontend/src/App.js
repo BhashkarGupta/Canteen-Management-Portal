@@ -23,6 +23,7 @@ import OrderManagementPage from './pages/cook/OrderManagement';
 import VenueManagementPage from './pages/admin/VenueManagement';
 import AnnouncementManagement from './pages/admin/AnnouncementManagement';
 import UserManagement from './pages/admin/UserManagement';
+import FeedbackManagementPage from './pages/admin/FeedbackManagement';
 const App = () => {
   return (
     <div id="root">
@@ -49,6 +50,7 @@ const App = () => {
           <Route path="/venue-management" element={<VenueManagementPage />} />
           <Route path="/announcement-management" element={<AnnouncementManagement />} />
           <Route path="/user-management" element={<UserManagement />} />
+          <Route path="/feedback-management" element={<FeedbackManagementPage />} />
 
           {/* Protected Routes */}
           <Route

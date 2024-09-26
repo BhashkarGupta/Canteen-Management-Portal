@@ -89,17 +89,22 @@ const Navbar = () => {
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/menu-management">
-                      <FaUtensils className="me-1" /> Menu
+                        <FaUtensils className="me-1" /> Menu
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/inventory-management">
-                      <FaCartArrowDown className="me-1" /> Inventory
+                        <FaCartArrowDown className="me-1" /> Inventory
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/order-management">
-                      <FaListAlt className="me-1" /> Orders
+                        <FaListAlt className="me-1" /> Orders
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/feedback-management">
+                        <FaCommentDots className="me-1" />Feedback
                       </Link>
                     </li>
                   </>
@@ -115,24 +120,29 @@ const Navbar = () => {
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/announcement-management">
-                      <FaBullhorn className="me-1" /> Announcements
+                        <FaBullhorn className="me-1" /> Announcements
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/venue-management">
-                      <FaMapMarker className="me-1" /> Venue
+                        <FaMapMarker className="me-1" /> Venue
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/user-management">
-                      <FaUsers className="me-1" /> Users
+                        <FaUsers className="me-1" /> Users
                       </Link>
                     </li>
                     <li className="nav-item">
-                    <Link className="nav-link" to="/weekly-menu">
-                      <FaCalendarAlt className="me-1" /> Weekly Menu
-                    </Link>
-                  </li>
+                      <Link className="nav-link" to="/weekly-menu">
+                        <FaCalendarAlt className="me-1" /> Weekly Menu
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/feedback-management">
+                        <FaCommentDots className="me-1" />Feedback
+                      </Link>
+                    </li>
                   </>
                 )}
 
@@ -146,32 +156,37 @@ const Navbar = () => {
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/user-management">
-                      <FaUsers className="me-1" /> Users
+                        <FaUsers className="me-1" /> Users
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/menu-management">
-                      <FaUtensils className="me-1" /> Menu
+                        <FaUtensils className="me-1" /> Menu
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/venue-management">
-                      <FaMapMarker className="me-1" /> Venue
+                        <FaMapMarker className="me-1" /> Venue
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/announcement-management">
-                      <FaBullhorn className="me-1" /> Announcements
+                        <FaBullhorn className="me-1" /> Announcements
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/order-management">
-                      <FaListAlt className="me-1" /> Orders
+                        <FaListAlt className="me-1" /> Orders
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="/inventory-management">
-                      <FaCartArrowDown className="me-1" /> Inventory
+                        <FaCartArrowDown className="me-1" /> Inventory
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/feedback-management">
+                        <FaCommentDots className="me-1" />Feedback
                       </Link>
                     </li>
                   </>
