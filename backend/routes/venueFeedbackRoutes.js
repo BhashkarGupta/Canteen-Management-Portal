@@ -23,7 +23,7 @@ router.post(
 router.get(
   '/',
   authMiddleware,
-  allowRoles(['admin', 'root']),
+  allowRoles(['admin', 'root', 'cook']),
   getAllVenueFeedbacks
 );
 

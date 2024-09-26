@@ -23,7 +23,7 @@ export const submitFeedback = async (req, res) => {
 // Get All Feedbacks (Accessible by root and admin)
 export const getAllFeedbacks = async (req, res) => {
   try {
-    if (!['root', 'admin'].includes(req.user.role)) {
+    if (!['root', 'admin', 'cook'].includes(req.user.role)) {
       return res.status(403).json({ message: 'Access denied' });
     }
 
