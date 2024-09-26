@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
-import axios from 'axios';
-import { FaHome, FaUser, FaSignInAlt, FaUserPlus, FaSignOutAlt, FaListAlt, FaUtensils, FaCalendarAlt, FaBuilding, FaCommentDots, FaUsers, FaMapMarked, FaMapMarkedAlt, FaMapMarker, FaBullhorn, FaCartArrowDown } from 'react-icons/fa'; // Icons
+import { FaHome, FaUser, FaSignInAlt, FaUserPlus, FaSignOutAlt, FaListAlt, FaUtensils, FaCalendarAlt, FaBuilding, FaCommentDots, FaUsers, FaMapMarker, FaBullhorn, FaCartArrowDown } from 'react-icons/fa'; // Icons
 import { GiMeal } from "react-icons/gi";
 
 
@@ -11,9 +10,8 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   // Log out the user
-  const handleLogout = async () => {
+  const handleLogout = () => {
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/users/logout`);
       logout();
       navigate('/login');
     } catch (error) {
