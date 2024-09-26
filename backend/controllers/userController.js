@@ -172,11 +172,11 @@ export const loginUser = async (req, res) => {
 // Reset User Password
 export const resetUserPassword = async (req, res) => {
   try {
-    const { id } = req.params; // ID of the user whose password is to be reset
-    const { newPassword } = req.body;
+    // const { id } = req.params; // ID of the user whose password is to be reset
+    const { email,newPassword } = req.body;
 
     // Find the target user
-    const targetUser = await User.findByPk(id);
+    const targetUser = await User.findAll({ where: { email: email } });
     if (!targetUser) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -201,7 +201,7 @@ export const resetUserPassword = async (req, res) => {
     const password_hash = await bcrypt.hash(newPassword, salt);
 
     // Update user's password
-    await targetUser.update({ password_hash });
+    await targetUser[0].update({ password_hash });
 
     res.json({ message: 'Password reset successful' });
   } catch (error) {
@@ -250,6 +250,17 @@ export const changePassword = async (req, res) => {
     res.json({ message: 'Password changed successfully' });
   } catch (error) {
     console.error('Change password error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Fetch all users
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.findAll();
+    res.json(users);
+  } catch (error) {
+    console.error('Get all users error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 };

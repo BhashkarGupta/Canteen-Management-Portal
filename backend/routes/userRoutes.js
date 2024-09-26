@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { registerUser, loginUser, resetUserPassword,changePassword,registerUserAdmin,registerUserRoot} from '../controllers/userController.js';
+import { registerUser, loginUser, resetUserPassword,changePassword,registerUserAdmin,registerUserRoot,getAllUsers} from '../controllers/userController.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
 import { allowRoles } from '../middleware/roleMiddleware.js';
 import User from '../models/User.js';
@@ -43,7 +43,7 @@ router.post(
 
 // Reset User Password
 router.put(
-  '/:id/reset-password',
+  '/reset-password',
   authMiddleware,
   allowRoles(['root', 'admin']),
   resetUserPassword
@@ -55,5 +55,8 @@ router.put(
   authMiddleware,
   changePassword
 );
+
+// Fethch all users
+router.get('/get-all-users', authMiddleware, allowRoles(['root', 'admin']), getAllUsers);
 
 export default router;

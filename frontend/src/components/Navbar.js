@@ -124,6 +124,11 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li className="nav-item">
+                      <Link className="nav-link" to="/user-management">
+                        User Management
+                      </Link>
+                    </li>
+                    <li className="nav-item">
                     <Link className="nav-link" to="/weekly-menu">
                       <FaCalendarAlt className="me-1" /> Weekly Menu
                     </Link>
@@ -140,22 +145,22 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/manage-users">
-                        Manage Users
+                      <Link className="nav-link" to="/user-management">
+                        User Management
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/venue-requests">
+                      <Link className="nav-link" to="/veneue-management">
                         Manage Venue Requests
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/announcements">
+                      <Link className="nav-link" to="/announcements-management">
                         Manage Announcements
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/inventory">
+                      <Link className="nav-link" to="/inventory-management">
                         Manage Inventory
                       </Link>
                     </li>
