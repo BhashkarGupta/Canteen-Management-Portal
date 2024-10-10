@@ -70,10 +70,10 @@ Welcome to the  **Canteen Management Portal** , a full-stack web application des
 * **Payment Gateway** : Integration for online payments directly through the portal.
 
 ## User Dashboard
-[![User Dashboard - Watch on youtube](./screenshot/User/user_home.png)](https://youtu.be/kYI8qndnx9o)
+[![User Dashboard - Watch on youtube](./screenshot/yt/User_yt.png)](https://youtu.be/kYI8qndnx9o)
 
 ## Cook Dashboard
-[![Cook Dashboard - Watch on youtube](./screenshot/cook/cook_dashboard.png)](https://youtu.be/G0F13qL3sBk)
+[![Cook Dashboard - Watch on youtube](./screenshot/yt/Cook_yt.png)](https://youtu.be/G0F13qL3sBk)
 
 ## Admin Dashboard
-[![Admin Dashboard - Watch on youtube](./screenshot/Admin/Admin_dashboard.png)](https://youtu.be/Hn1kML7F6s0)
+[![Admin Dashboard - Watch on youtube](./screenshot/yt/Admin_yt.png)](https://youtu.be/Hn1kML7F6s0)
