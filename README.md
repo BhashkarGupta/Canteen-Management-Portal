@@ -1,6 +1,5 @@
 # Canteen Management Portal
 
-
 Welcome to the  **Canteen Management Portal** , a full-stack web application designed to streamline and manage canteen operations. This portal allows users to place orders, manage inventory, book venues, provide feedback, and more. Built using  **Node.js** ,  **React.js** , and  **PostgreSQL** , the system offers an efficient solution for managing canteen activities with real-time tracking and role-based access control.
 
 ## Features
@@ -69,11 +68,16 @@ Welcome to the  **Canteen Management Portal** , a full-stack web application des
 * **Image Support** : Adding images for menu items to improve user experience.
 * **Payment Gateway** : Integration for online payments directly through the portal.
 
-## User Dashboard
+**Showcasing:**
+
+## User:
+
 [![User Dashboard - Watch on youtube](./screenshot/yt/User_yt.png)](https://youtu.be/kYI8qndnx9o)
 
-## Cook Dashboard
+## Cook:
+
 [![Cook Dashboard - Watch on youtube](./screenshot/yt/Cook_yt.png)](https://youtu.be/G0F13qL3sBk)
 
-## Admin Dashboard
+## Admin:
+
 [![Admin Dashboard - Watch on youtube](./screenshot/yt/Admin_yt.png)](https://youtu.be/Hn1kML7F6s0)
