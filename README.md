@@ -1,3 +1,4 @@
+### **IGNOU BCA Project Sample**
 # Canteen Management Portal
 
 Welcome to the  **Canteen Management Portal** , a full-stack web application designed to streamline and manage canteen operations. This portal allows users to place orders, manage inventory, book venues, provide feedback, and more. Built using  **Node.js** ,  **React.js** , and  **PostgreSQL** , the system offers an efficient solution for managing canteen activities with real-time tracking and role-based access control.
